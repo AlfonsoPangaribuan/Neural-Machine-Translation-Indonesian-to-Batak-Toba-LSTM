@@ -1,88 +1,67 @@
-Neural Machine Translation Indonesia ke Bahasa Batak Toba
+# Neural Machine Translation Indonesia ke Bahasa Batak Toba
 
-BiLSTM Encoder Decoder dengan Attention dan Evaluasi BLEU dan ROUGE
-
-Deskripsi Proyek
-
+## Deskripsi Proyek
 Repository ini berisi implementasi sistem penerjemahan otomatis dari Bahasa Indonesia ke Bahasa Batak Toba menggunakan pendekatan Neural Machine Translation berbasis BiLSTM dengan mekanisme Attention. Proyek ini dikembangkan untuk mendukung penelitian low resource machine translation dan menyediakan baseline terbuka untuk pasangan bahasa Indonesia dan Batak Toba.
 
-Fitur Utama
+## Fitur Utama
+- Arsitektur BiLSTM Encoder–Decoder dengan Attention
+- Dataset paralel berjumlah 5050 pasangan kalimat
+- Evaluasi menggunakan BLEU 1–4 dan ROUGE 1, ROUGE 2, ROUGE L
+- Checkpoint model pada epoch 10, 40, 70, dan 100
+- Output berupa grafik BLEU, grafik ROUGE, tabel BLEU, dan tabel ROUGE
+- Model dilatih dengan Early Stopping dan Adam Optimizer
 
-Arsitektur BiLSTM Encoder Decoder dengan Attention.
+## Arsitektur Model
+Model terdiri dari Encoder BiLSTM, Attention Mechanism, dan Decoder LSTM. Encoder menghasilkan representasi konteks dua arah, Attention menghitung bobot relevansi token, dan Decoder menghasilkan token target langkah demi langkah.
 
-Dataset paralel berjumlah 5050 pasangan kalimat Indonesia dan Batak Toba.
+## Struktur Repository
+- data: korpus paralel
+- notebooks: notebook pelatihan
+- src: definisi model, preprocessing, training, evaluasi
+- results: checkpoint, grafik, tabel, prediksi
+- README.md: dokumentasi utama
 
-Evaluasi performa menggunakan BLEU 1 sampai 4 dan ROUGE 1, ROUGE 2, ROUGE L.
-
-Penyimpanan model pada epoch tertentu yaitu 10, 40, 70, dan 100.
-
-Output berupa grafik BLEU, grafik ROUGE, tabel BLEU, dan tabel ROUGE.
-
-Model dilatih dengan Early Stopping dan Adam Optimizer.
-
-Arsitektur Model
-
-Model terdiri dari tiga komponen utama yaitu Encoder BiLSTM, Attention Mechanism, dan Decoder LSTM. Encoder menghasilkan representasi konteks dua arah, Attention memberikan bobot relevansi terhadap token sumber, dan Decoder menghasilkan token target secara bertahap berdasarkan hidden state sebelumnya.
-
-Struktur Repository
-
-data berisi file korpus paralel
-notebooks berisi file pelatihan model dalam format ipynb
-src berisi modul model, utilitas data, pelatihan, dan evaluasi
-results berisi checkpoint model, grafik, tabel, dan prediksi
-README.md sebagai dokumentasi utama
-
-Instalasi
-
-Clone repository
-git clone https or ssh repository
+## Instalasi
+```
+git clone https://example.com/repo
 cd NMT-BatakToba
-
-Install dependencies
 pip install -r requirements.txt
+```
 
-Atau pada Google Colab
+Google Colab:
+```
 pip install torch datasets evaluate sentencepiece matplotlib scikit-learn tqdm
+```
 
-Menjalankan Pelatihan
-
-Gunakan notebook yang tersedia atau jalankan perintah berikut
+## Menjalankan Pelatihan
+```
 python train.py --data data/corpus_batak.csv --epochs 100 --batch_size 64
+```
 
-Checkpoint model otomatis disimpan pada direktori results atau checkpoints sesuai konfigurasi.
+## Evaluasi Model
+```
+python evaluation.py --checkpoint results/best_seq2seq.pt --data data/corpus_batak.csv
+```
 
-Evaluasi Model
+## Contoh Output
+Input: akan tetapi, terdapat juga keluarga miskin yang terpaksa menjual aset  
+Output: naeng alai, tardapot musem tondong pogos na tarabuk manggadis aset
 
-Evaluasi BLEU dan ROUGE dapat dilakukan dengan menjalankan
-python evaluation.py --checkpoint results or checkpoints best_seq2seq.pt --data data/corpus_batak.csv
+Input: makan di hari minggu
+Output: mangan i ari minggu
 
-Hasil evaluasi disimpan dalam bentuk file CSV dan grafik pada folder results atau metrics.
 
-Contoh Output
+## Tujuan Proyek
+- Memberikan baseline penelitian untuk bahasa daerah low-resource
+- Menghasilkan evaluasi komprehensif BLEU dan ROUGE
 
-Input: apa kabar hari ini
-Output: aso do hamu on
+## Kepentingan Proyek
+Bahasa Batak Toba termasuk kategori terancam punah. Model ini diharapkan mendukung pelestarian bahasa daerah.
 
-Input: saya pergi ke rumah nenek
-Output: au pesta tu jabu namboru
-
-Tujuan Proyek
-
-Membangun sistem penerjemahan otomatis bahasa Indonesia ke Batak Toba.
-
-Memberikan baseline penelitian untuk NMT bahasa daerah dengan sumber daya terbatas.
-
-Menghasilkan evaluasi komprehensif menggunakan BLEU dan ROUGE.
-
-Kepentingan Proyek
-
-Bahasa Batak Toba termasuk kategori terancam punah. Dengan adanya model terjemahan dasar berbasis NMT, penelitian ini diharapkan dapat mendukung upaya pelestarian bahasa daerah serta memperluas akses pembelajaran bahasa Batak Toba.
-
-Referensi (Format IEEE)
-
-[1] I. Sutskever, O. Vinyals, and Q. V. Le, Sequence to sequence learning with neural networks, NIPS, 2014.
-[2] M. T. Luong, H. Pham, and C. D. Manning, Effective approaches to attention based neural machine translation, EMNLP, 2015.
-[3] H. Susanto, A. Diandaru, G. Krisnadhi, A. Purwarianti, and D. Wijaya, Replicable Benchmarking of Neural Machine Translation on Low Resource Local Languages in Indonesia, ACL, 2023.
-[4] B. O. S. Miranda, H. Yuliansyah, and M. K. Biddinika, Machine Translation Indonesian Bengkulu Malay Using Neural Machine Translation LSTM, 2024.
-[5] S. Sakinah, R. Ramadhan, and Y. Hartono, Neural Machine Translation untuk Bahasa Sunda Loma Sunda Halus Menggunakan Long Short Term Memory, 2024.
-[6] D. Sulistyo, A. Wibawa, D. Prasetya, and F. Ahda, An Enhanced Pivot Based Neural Machine Translation for Low Resource Languages, International Journal of Advances in Intelligent Informatics, vol. 11, no. 2, pp. 258 to 274, 2025.
+## Referensi
+[1] I. Sutskever et al., Sequence to Sequence Learning with Neural Networks, NIPS, 2014.  
+[2] M. T. Luong et al., Effective Approaches to Attention-based Neural Machine Translation, EMNLP, 2015.  
+[3] H. Susanto et al., Replicable Benchmarking of Neural Machine Translation on Low-Resource Local Languages in Indonesia, ACL, 2023.  
+[4] B. O. S. Miranda et al., Machine Translation Indonesian Bengkulu Malay Using NMT-LSTM, 2024.  
+[5] S. Sakinah et al., Neural Machine Translation Sunda Loma–Sunda Halus Using LSTM, 2024.  
+[6] D. Sulistyo et al., An Enhanced Pivot-Based Neural Machine Translation for Low-Resource Languages, IJAIN, 2025.
